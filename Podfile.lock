@@ -1,0 +1,52 @@
+PODS:
+  - AFNetworking (2.2.1):
+    - AFNetworking/NSURLConnection
+    - AFNetworking/NSURLSession
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+    - AFNetworking/UIKit
+  - AFNetworking/NSURLConnection (2.2.1):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/NSURLSession (2.2.1):
+    - AFNetworking/NSURLConnection
+  - AFNetworking/Reachability (2.2.1)
+  - AFNetworking/Security (2.2.1)
+  - AFNetworking/Serialization (2.2.1)
+  - AFNetworking/UIKit (2.2.1):
+    - AFNetworking/NSURLConnection
+    - AFNetworking/NSURLSession
+  - AMTagListView (0.2.1)
+  - AutoHideKeyboardControllers (0.0.1)
+  - ISMethodSwizzling (0.0.2)
+  - ISRefreshControl (1.4.1):
+    - ISMethodSwizzling (~> 0.0.2)
+  - LTUpdate (0.0.2)
+  - MBProgressHUD (0.8)
+  - MTStatusBarOverlay (0.9.1)
+  - Reachability (3.1.1)
+
+DEPENDENCIES:
+  - AFNetworking
+  - AMTagListView
+  - AutoHideKeyboardControllers
+  - ISRefreshControl
+  - LTUpdate
+  - MBProgressHUD
+  - MTStatusBarOverlay
+  - Reachability
+
+SPEC CHECKSUMS:
+  AFNetworking: 0121f4b69be3fa58d1ab317866e036e12ac9651d
+  AMTagListView: edadc34088ae236f1e50678f3de793bba2382c0b
+  AutoHideKeyboardControllers: 259b13da5210b991c60ce8c8759926648539dc27
+  ISMethodSwizzling: 806aafc79dbdafbc482eae3f86b0c632ed8b1f08
+  ISRefreshControl: da5d27a3a840c8e03b2334395bf90e9c1362f761
+  LTUpdate: ee58a30f73e6dcbc47ce1e5c617b024212a2dd98
+  MBProgressHUD: 2bbc6f470111daf7f3eaa4eb12b8cbf01c4c0622
+  MTStatusBarOverlay: 2cee705996e4e307191d423bf49e583b9b2c14ac
+  Reachability: be4883bb93f31e38266ae3365e5600a317aae735
+
+COCOAPODS: 0.29.0
