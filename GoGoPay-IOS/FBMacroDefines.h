@@ -9,6 +9,7 @@
 #ifndef GoGoPay_IOS_FBMacroDefines_h
 #define GoGoPay_IOS_FBMacroDefines_h
 
-
+#define ERROR_SUCCESS 0
+#define ERROR_UNLOGIN 11
 
 #endif

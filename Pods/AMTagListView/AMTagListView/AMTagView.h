@@ -32,6 +32,9 @@ extern NSString * const AMTagViewNotification;
 @property (nonatomic, strong) UIColor	*tagColor UI_APPEARANCE_SELECTOR;
 @property (nonatomic, strong) UIColor	*innerTagColor UI_APPEARANCE_SELECTOR;
 
+@property (nonatomic,assign) int catId;
+@property (nonatomic,assign) BOOL selected;
+
 - (void)setupWithText:(NSString*)text;
 - (NSString*)tagText;
 

@@ -9,6 +9,9 @@
 #import "FBMainViewController.h"
 #import "AMTagListView.h"
 #import "AMTagView.h"
+#import "Reachability.h"
+#import "FBGlobalConfig.h"
+#import "FBLoginViewController.H"
 #import <QuartzCore/QuartzCore.h>
 
 @interface FBMainViewController ()
@@ -16,6 +19,8 @@
 @end
 
 @implementation FBMainViewController
+
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -50,6 +55,9 @@
     
     [self initViews];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTagsView:) name:@"loginSuccessed" object:nil];
+
+    
     // Tag's corner radius
     [[AMTagView appearance] setRadius:0];
     
@@ -70,6 +78,7 @@
     //[[AMTagListView appearance] set]
     
     
+    self.tagStates = [[NSDictionary alloc] init];
     UIView *tagsView = [self.view viewWithTag:21];
     
     self.tagListView = [[AMTagListView alloc] initWithFrame:(CGRect){0, 0, tagsView.frame.size.width, tagsView.frame.size.height}];
@@ -77,17 +86,60 @@
     self.tagListView.marginY = 10;
     [tagsView addSubview:self.tagListView];
     
-    // Add one tag
-    [self.tagListView addTag:@"衣服"];
-    
-    // Add multiple tags
-    [self.tagListView addTags:@[@"衬衣", @"裤子", @"包包", @"领带", @"其他"]];
-	// Do any additional setup after loading the view.
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tagSelectedNotification:) name:AMTagViewNotification object:nil];
     
-    if(self.tagListView.tags.count >0)
-        [self selectTag:[self.tagListView.tags objectAtIndex:0]];
+    if(! [FBGlobalConfig sharedConfig].isLogin)
+    {
+        [self performSegueWithIdentifier:@"mainToLoginIdent" sender:self];
+        //FBLoginViewController *loginc = [[FBLoginViewController alloc] init];
+        //[self presentViewController:loginc animated:NO completion:^{
+        //}];
+        return;
+    }
+    else
+    {
+        [self reloadTagsView:nil];
+    }
+    
+    // Allocate a reachability object
+    Reachability* reach = [Reachability reachabilityWithHostname:@"www.baidu.com"];
+    
+    // Set the blocks
+    reach.reachableBlock = ^(Reachability*reach)
+    {
+        [FBGlobalConfig HUDShowMessage:@"网络未连接" addedToView:self.view];
+    };
+    
+    reach.unreachableBlock = ^(Reachability*reach)
+    {
+
+    };
+    
+    
+    // Start the notifier, which will cause the reachability object to retain itself!
+    [reach startNotifier];
+    
+    
+    //if(self.tagListView.tags.count >0)
+     //   [self selectTag:[self.tagListView.tags objectAtIndex:0]];
+}
+
+-(void)reloadTagsView:(NSNotification *) ns
+{
+    // Add one tag
+    //[self.tagListView addTag:@"衣服"];
+    for (AMTagView *stag in self.tagListView.tags) {
+        stag.selected = NO;
+        [self.tagListView removeTag:stag];
+    }
+    NSArray *cats = [FBGlobalConfig sharedConfig].catalogs;
+    for (NSDictionary * item in cats) {
+        [self.tagListView addTag:[item objectForKey:@"name"] tagId:[[item objectForKey:@"id"] intValue]];
+    }
+    
+    // Add multiple tags
+    //[self.tagListView addTags:@[@"衬衣", @"裤子", @"包包", @"领带", @"其他"]];
+	// Do any additional setup after loading the view.
 }
 
 -(void)tagSelectedNotification:(NSNotification *) ns
@@ -99,13 +151,21 @@
 
 -(void)selectTag:(AMTagView *)tag
 {
-    for (AMTagView *stag in self.tagListView.tags) {
-        [stag setTextColor:[UIColor colorWithRed:0.4 green:0.4 blue:0.4 alpha:1.0]];
-        [stag layoutSubviews];
+    if (tag.selected) {
+        tag.selected = NO;
+        [tag setTextColor:[UIColor colorWithRed:0.4 green:0.4 blue:0.4 alpha:1.0]];
+        [tag layoutSubviews];
+    
     }
-    [tag setTextColor:[UIColor colorWithRed:1 green:0.1746 blue:0.33466 alpha:1.0]];
-    [tag layoutSubviews];
+    else
+    {
+        tag.selected = YES;
+        [tag setTextColor:[UIColor colorWithRed:1 green:0.1746 blue:0.33466 alpha:1.0]];
+        [tag layoutSubviews];
+    }
+
 }
+
 
 - (void)didReceiveMemoryWarning
 {

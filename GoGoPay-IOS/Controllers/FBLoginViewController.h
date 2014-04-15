@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AutoHideKeyboardViewController.h"
 
-@interface FBLoginViewController : UIViewController
+@interface FBLoginViewController : AutoHideKeyboardViewController<UITextFieldDelegate>
+@property (weak, nonatomic) IBOutlet UITextField *ibUsername;
+@property (weak, nonatomic) IBOutlet UITextField *ibPassword;
+
+- (IBAction)login:(id)sender;
 
 @end

@@ -31,6 +31,8 @@
 		2CA1F5DF18E93154002F242F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CA1F5BE18E93154002F242F /* UIKit.framework */; };
 		2CA1F5E718E93154002F242F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2CA1F5E518E93154002F242F /* InfoPlist.strings */; };
 		2CA1F5E918E93154002F242F /* GoGoPay_IOSTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CA1F5E818E93154002F242F /* GoGoPay_IOSTests.m */; };
+		2CCE711A18FBAF160078ED72 /* FBGlobalConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CCE711918FBAF160078ED72 /* FBGlobalConfig.m */; };
+		2CCE711D18FBDBDF0078ED72 /* FBDataResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CCE711C18FBDBDF0078ED72 /* FBDataResult.m */; };
 		2CEBDE4C18EBFDC000BEA773 /* FBLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CEBDE4918EBFDC000BEA773 /* FBLoginViewController.m */; };
 		2CEBDE4D18EBFDC000BEA773 /* FBMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CEBDE4B18EBFDC000BEA773 /* FBMainViewController.m */; };
 		2CEBDE5018EC021600BEA773 /* FBValidViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CEBDE4F18EC021600BEA773 /* FBValidViewController.m */; };
@@ -85,6 +87,11 @@
 		2CA1F5E418E93154002F242F /* GoGoPay-IOSTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoGoPay-IOSTests-Info.plist"; sourceTree = "<group>"; };
 		2CA1F5E618E93154002F242F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		2CA1F5E818E93154002F242F /* GoGoPay_IOSTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GoGoPay_IOSTests.m; sourceTree = "<group>"; };
+		2CCE711818FBAF160078ED72 /* FBGlobalConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBGlobalConfig.h; sourceTree = "<group>"; };
+		2CCE711918FBAF160078ED72 /* FBGlobalConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBGlobalConfig.m; sourceTree = "<group>"; };
+		2CCE711B18FBDBDF0078ED72 /* FBDataResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FBDataResult.h; path = Entities/FBDataResult.h; sourceTree = "<group>"; };
+		2CCE711C18FBDBDF0078ED72 /* FBDataResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FBDataResult.m; path = Entities/FBDataResult.m; sourceTree = "<group>"; };
+		2CCE711E18FBE0CE0078ED72 /* FBMacroDefines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FBMacroDefines.h; sourceTree = "<group>"; };
 		2CEBDE4818EBFDC000BEA773 /* FBLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FBLoginViewController.h; path = Controllers/FBLoginViewController.h; sourceTree = "<group>"; };
 		2CEBDE4918EBFDC000BEA773 /* FBLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FBLoginViewController.m; path = Controllers/FBLoginViewController.m; sourceTree = "<group>"; };
 		2CEBDE4A18EBFDC000BEA773 /* FBMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FBMainViewController.h; path = Controllers/FBMainViewController.h; sourceTree = "<group>"; };
@@ -141,6 +148,8 @@
 				2C43CCDE18ED3EE700498A88 /* FBBill.m */,
 				2C43CCE018ED415A00498A88 /* FBBillByMonth.h */,
 				2C43CCE118ED415A00498A88 /* FBBillByMonth.m */,
+				2CCE711B18FBDBDF0078ED72 /* FBDataResult.h */,
+				2CCE711C18FBDBDF0078ED72 /* FBDataResult.m */,
 			);
 			name = Entities;
 			sourceTree = "<group>";
@@ -200,6 +209,9 @@
 				2CA1F5CF18E93154002F242F /* Main_iPad.storyboard */,
 				2CA1F5D518E93154002F242F /* Images.xcassets */,
 				2CA1F5C118E93154002F242F /* Supporting Files */,
+				2CCE711818FBAF160078ED72 /* FBGlobalConfig.h */,
+				2CCE711918FBAF160078ED72 /* FBGlobalConfig.m */,
+				2CCE711E18FBE0CE0078ED72 /* FBMacroDefines.h */,
 			);
 			path = "GoGoPay-IOS";
 			sourceTree = "<group>";
@@ -389,12 +401,14 @@
 				2CEBDE4D18EBFDC000BEA773 /* FBMainViewController.m in Sources */,
 				2CEBDE5018EC021600BEA773 /* FBValidViewController.m in Sources */,
 				2C43CCE218ED415A00498A88 /* FBBillByMonth.m in Sources */,
+				2CCE711A18FBAF160078ED72 /* FBGlobalConfig.m in Sources */,
 				2CEBDE4C18EBFDC000BEA773 /* FBLoginViewController.m in Sources */,
 				2C221F2418EBF54300076F9D /* FBUIViewWithBorder.m in Sources */,
 				2C43CCDB18ED3E0E00498A88 /* FBBillTableViewController.m in Sources */,
 				2C43CCE618ED4B0C00498A88 /* FBBillCell.m in Sources */,
 				2C0E1CD418EC5C8F00CCDADC /* FBSuccessViewController.m in Sources */,
 				2C43CCDF18ED3EE700498A88 /* FBBill.m in Sources */,
+				2CCE711D18FBDBDF0078ED72 /* FBDataResult.m in Sources */,
 				2C221F2118EBF18800076F9D /* FBTextField.m in Sources */,
 				2CA1F5CB18E93154002F242F /* FBAppDelegate.m in Sources */,
 				2CA1F5C718E93154002F242F /* main.m in Sources */,

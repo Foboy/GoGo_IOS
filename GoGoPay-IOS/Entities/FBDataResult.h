@@ -9,5 +9,11 @@
 #import <Foundation/Foundation.h>
 
 @interface FBDataResult : NSObject
+@property (nonatomic,assign) int Error;
+@property (nonatomic,assign) int Id;
+@property (nonatomic,copy) NSString * ErrorMessage;
+@property (nonatomic,copy) NSString * ExMessage;
+@property (nonatomic,strong) id Data;
 
+-(id)initWithJSONResponse:(NSDictionary *) response;
 @end

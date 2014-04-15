@@ -25,7 +25,7 @@ typedef void (^AMTagListViewTapHandler)(AMTagView*);
 *
 * @param text The text that the tag will display
 */
-- (void)addTag:(NSString*)text;
+- (void)addTag:(NSString*)text tagId:(int)_id;
 
 /** Add a multiple tags
  *
@@ -33,7 +33,7 @@ typedef void (^AMTagListViewTapHandler)(AMTagView*);
  *
  * @param array An array of strings
  */
-- (void)addTags:(NSArray*)array;
+
 
 /** Remove a tag
  *

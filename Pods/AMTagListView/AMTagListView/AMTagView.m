@@ -19,6 +19,9 @@ NSString * const AMTagViewNotification = @"AMTagViewNotification";
 
 @implementation AMTagView
 
+@synthesize catId;
+@synthesize selected;
+
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];

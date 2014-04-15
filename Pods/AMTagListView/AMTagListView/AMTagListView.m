@@ -57,7 +57,7 @@
 	_tapHandler = tapHandler;
 }
 
-- (void)addTag:(NSString*)text
+- (void)addTag:(NSString*)text tagId:(int)_id
 {
 	UIFont* font = [[AMTagView appearance] textFont] ? [[AMTagView appearance] textFont] : kDefaultFont;
 	CGSize size = [text sizeWithAttributes:@{NSFontAttributeName: font}];
@@ -69,6 +69,8 @@
 	size.width = MIN(size.width, self.frame.size.width - self.marginX * 2);
 
 	AMTagView* tagView = [[AMTagView alloc] initWithFrame:(CGRect){0, 0, size.width, size.height}];
+    tagView.catId = _id;
+    tagView.selected = NO;
 	[tagView setupWithText:text];
 	[self.tags addObject:tagView];
 	
@@ -111,12 +113,7 @@
 	[self setContentSize:(CGSize){self.frame.size.width, maxY + size.height +self.marginY}];
 }
 
-- (void)addTags:(NSArray*)array
-{
-	for (NSString* text in array) {
-		[self addTag:text];
-	}
-}
+
 
 - (void)removeTag:(AMTagView*)view
 {

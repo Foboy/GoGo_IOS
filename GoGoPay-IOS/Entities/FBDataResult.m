@@ -10,4 +10,24 @@
 
 @implementation FBDataResult
 
+@synthesize Error;
+@synthesize Id;
+@synthesize ErrorMessage;
+@synthesize ExMessage;
+@synthesize Data;
+
+-(id)initWithJSONResponse:(NSDictionary *) response
+{
+    if (self = [super init]) {
+        self.ErrorMessage = [response objectForKey:@"ErrorMessage"];
+        self.ExMessage = [response objectForKey:@"ExMessage"];
+        self.Error = [[response objectForKey:@"Error"] intValue];
+        if ([response objectForKey:@"Id"] != [NSNull null]) {
+            self.Id = [[response objectForKey:@"Id"] intValue];
+        }
+        
+        self.Data = [response objectForKey:@"Data"];
+    }
+    return self;
+}
 @end

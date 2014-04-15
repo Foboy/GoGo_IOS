@@ -56,11 +56,18 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="login:" destination="5rK-dJ-vPd" eventType="touchUpInside" id="hiH-Sd-VWE"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.52549019610000003" blue="0.52941176469999995" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="8hl-3S-oKI"/>
+                    <connections>
+                        <outlet property="ibPassword" destination="nmx-yZ-cdF" id="txh-DV-ENg"/>
+                        <outlet property="ibUsername" destination="bzj-1z-gEz" id="9ox-cG-6KI"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IVy-Ig-S9b" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -448,7 +455,7 @@
                     <connections>
                         <outlet property="ibAmountTextField" destination="fHd-eo-GJX" id="cYg-nn-8y5"/>
                         <outlet property="ibPhoneTextField" destination="OJn-wc-yc3" id="ooc-TL-8Em"/>
-                        <segue destination="5rK-dJ-vPd" kind="modal" id="04i-W0-Yxz"/>
+                        <segue destination="5rK-dJ-vPd" kind="modal" identifier="mainToLoginIdent" id="04i-W0-Yxz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QCU-gt-Xn7" userLabel="First Responder" sceneMemberID="firstResponder"/>
