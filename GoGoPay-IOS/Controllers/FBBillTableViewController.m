@@ -10,6 +10,10 @@
 #import "FBBill.h"
 #import "FBBillByMonth.h"
 #import "FBBillCell.h"
+#import "FBGlobalConfig.h"
+#import "ISRefreshControl.h"
+#import "FBDataResult.h"
+#import "NSDictionary+CaseIgnore.h"
 
 @interface FBBillTableViewController ()
 
@@ -22,6 +26,7 @@
     self = [super initWithStyle:style];
     if (self) {
         // Custom initialization
+        self.pageIndex = 0;
     }
     return self;
 }
@@ -31,49 +36,17 @@
     [super viewDidLoad];
     
     self.bills = [NSMutableArray arrayWithCapacity:20];
-    
-    FBBillByMonth *current = [[FBBillByMonth alloc] init];
-    current.bills = [NSMutableArray arrayWithCapacity:20];
-    current.month = @"本月";
-    FBBill *bill = [[FBBill alloc] init];
-    bill.name = @"张三";
-    bill.phone = @"187*****987";
-    bill.date =@"04-09 12:34";
-    bill.payMethod = 1;
-    bill.amount = 3235332.32f;
-    [current.bills addObject:bill];
-    
-    FBBill *bill2 = [[FBBill alloc] init];
-    bill2.name = @"张三";
-    bill2.phone = @"187*****987";
-    bill2.date =@"04-09 12:34";
-    bill2.payMethod = 2;
-    bill2.goamount = 10;
-    [current.bills addObject:bill2];
-    
-    FBBillByMonth *current2 = [[FBBillByMonth alloc] init];
-    current2.bills = [NSMutableArray arrayWithCapacity:20];
-    current2.month = @"三月";
-    FBBill *bill3 = [[FBBill alloc] init];
-    bill3.name = @"张三";
-    bill3.phone = @"187*****987";
-    bill3.date =@"04-09 12:34";
-    bill3.payMethod = 1;
-    bill3.amount = 223.03f;
-    [current2.bills addObject:bill3];
-    
-    FBBill *bill21 = [[FBBill alloc] init];
-    bill21.name = @"张三";
-    bill21.phone = @"187*****987";
-    bill21.date =@"04-09 12:34";
-    bill21.payMethod = 2;
-    bill21.goamount = 254;
-    [current2.bills addObject:bill21];
-    
-    [self.bills addObject:current];
-    [self.bills addObject:current2];
+    self.realbills =[[NSArray alloc] init];
     
     
+    [self reloadBills];
+    
+    self.refreshControl = (id)[[ISRefreshControl alloc] init];
+    [self.refreshControl addTarget:self
+                            action:@selector(refresh)
+                  forControlEvents:UIControlEventValueChanged];
+    
+
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -81,6 +54,126 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
+
+-(void)refresh
+{
+    //int64_t delayInSeconds = 4.0;
+    //dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+    //dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        //update view
+        [self reloadBills];
+    
+    //});
+}
+
+-(void)reloadBills
+{
+    __block MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    FBGlobalConfig *config = [FBGlobalConfig sharedConfig];
+    NSDictionary *parameters = @{@"page_index": [NSString stringWithFormat:@"%d",self.pageIndex ]};
+    
+    
+    [FBGlobalConfig POST:config.billListUrl parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"JSON: %@", responseObject);
+        FBDataResult *result = [[FBDataResult alloc] initWithJSONResponse:responseObject];
+        if (result.Error == ERROR_SUCCESS) {
+            NSArray *billsList = result.Data;
+            
+            
+            [self.refreshControl endRefreshing];
+            [self bindBills:billsList];
+            NSLog(@"查询成功 %@",self.bills);
+            [hud hide:YES afterDelay:0.0f];
+        }
+        else
+        {
+            hud.mode = MBProgressHUDModeText;
+            hud.labelText = result.ErrorMessage;
+            [hud hide:YES afterDelay:1.5f];
+        }
+        
+    }failure:^(AFHTTPRequestOperation *operation, NSError *error){
+        NSLog(@"Error: %@",error);
+    }];
+}
+
+-(void)bindBills:(NSArray *) billsList
+{
+    FBBillByMonth *month = nil;
+    
+    int monthNumber = 0;
+    NSDateFormatter *format=[[NSDateFormatter alloc]init];
+    
+    for (NSDictionary* billdic in billsList) {
+        FBBill* bill = [[FBBill alloc] init];
+        bill.amount = [[billdic objectForCaseInsensitiveKey:@"amount"] floatValue];
+        bill.name = [billdic objectForCaseInsensitiveKey:@"username"];
+        bill.phone =[billdic objectForCaseInsensitiveKey:@"mobile"];
+        id paymethod =[billdic objectForCaseInsensitiveKey:@"pay_mothed"];
+        if (paymethod != nil && paymethod != [NSNull null]) {
+            bill.payMethod =[paymethod intValue];
+        }
+        id gocoin =[billdic objectForCaseInsensitiveKey:@"go_coin"];
+        if (gocoin != nil && gocoin != [NSNull null]) {
+            bill.goamount =[gocoin intValue];
+        }
+        
+        NSLog(@"%@",[billdic objectForKey:@"create_time"]);
+        NSDate *date= [NSDate date];
+        id create =[billdic objectForCaseInsensitiveKey:@"create_time"];
+        if (create != nil && create != [NSNull null]) {
+            date=[NSDate dateWithTimeIntervalSince1970:[create intValue]];
+        }
+        
+        [format setDateFormat:@"MM-dd hh:mm"];
+        bill.date = [format stringFromDate:date];
+        [format setDateFormat:@"yyyyMM"];
+        monthNumber = [[format stringFromDate:date] intValue];
+        if (month == nil) {
+            FBBillByMonth *newmonth = [[FBBillByMonth alloc] init];
+            [self.bills addObject:newmonth];
+            month = newmonth;
+            month.bills = [NSMutableArray arrayWithCapacity:20];
+            month.monthNumber = monthNumber;
+            month.month = [self dateAsMonth:monthNumber now:[[format stringFromDate:[NSDate date]] intValue]];
+        }
+        else if (month.monthNumber != monthNumber)
+        {
+            FBBillByMonth *newmonth = [[FBBillByMonth alloc] init];
+            [self.bills addObject:newmonth];
+            month = newmonth;
+            month.bills = [NSMutableArray arrayWithCapacity:20];
+            month.monthNumber = monthNumber;
+            month.month = [self dateAsMonth:monthNumber now:[[format stringFromDate:[NSDate date]] intValue]];
+        }
+
+        [month.bills addObject:bill];
+    }
+    
+    [self.tableView reloadData];
+}
+
+-(NSString *)dateAsMonth:(int)date now:(int)now
+{
+    NSLog(@"date:%d",date);
+    NSLog(@"now:%d",now);
+    if(now/100 == date/100)
+    {
+        if(now == date)
+        {
+            return @"本月";
+        }
+        else
+        {
+            return [NSString stringWithFormat:@"%d月",date - date/100*100];
+        }
+    }
+    else
+    {
+        return [NSString stringWithFormat:@"%d年%d月",date/100,date - date/100*100];
+    }
+}
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -113,23 +206,16 @@
     cell.ibBillNameAndPhoneLabel.text = [NSString stringWithFormat:@"%@(%@)",bill.name,bill.phone];
     cell.ibBillDateLabel.text = bill.date;
     if (bill.payMethod == 1) {
-        cell.ibBillPayMethodLabel.text = @"拉卡拉";
-        cell.ibBillAmountLabel.text = [self floatToDecimalString:bill.amount];
+        cell.ibBillPayMethodLabel.text =@"GO币支付";
+        cell.ibBillAmountLabel.text = [NSString stringWithFormat:@"%dGO币",bill.goamount];
+
     }
     else
     {
-        cell.ibBillPayMethodLabel.text =@"GO币支付";
-        cell.ibBillAmountLabel.text = [NSString stringWithFormat:@"%dGO币",bill.goamount];
+        cell.ibBillPayMethodLabel.text = @"拉卡拉";
+        cell.ibBillAmountLabel.text = [FBGlobalConfig floatToDecimalString:bill.amount];
     }
     return cell;
-}
-
--(NSString *)floatToDecimalString:(float)amount
-{
-    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
-    [numberFormatter setPositiveFormat:@"###,##0.00;"];
-    NSString *formattedNumberString = [numberFormatter stringFromNumber:[NSNumber numberWithDouble:amount]];
-    return [NSString stringWithFormat:@"%@元",formattedNumberString];
 }
 
 

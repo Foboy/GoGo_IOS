@@ -11,4 +11,5 @@
 @implementation FBBillByMonth
 @synthesize bills;
 @synthesize month;
+@synthesize monthNumber;
 @end

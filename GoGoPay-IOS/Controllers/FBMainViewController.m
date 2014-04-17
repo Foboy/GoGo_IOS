@@ -12,6 +12,7 @@
 #import "Reachability.h"
 #import "FBGlobalConfig.h"
 #import "FBLoginViewController.H"
+#import "FBDataResult.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface FBMainViewController ()
@@ -56,6 +57,9 @@
     [self initViews];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTagsView:) name:@"loginSuccessed" object:nil];
+    
+    [self.ibPhoneTextField setText:@"15882323654"];
+    [self.ibAmountTextField setText:@"234.09"];
 
     
     // Tag's corner radius
@@ -173,4 +177,41 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)mainConfirmClick:(id)sender {
+    NSString *phone = [[self ibPhoneTextField] text];
+    NSString *amount = [[self ibAmountTextField] text];
+    __block MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    FBGlobalConfig *config = [FBGlobalConfig sharedConfig];
+    NSDictionary *parameters = @{@"phone": phone};
+
+    
+    [FBGlobalConfig POST:config.getGoInfoUrl parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"JSON: %@", responseObject);
+        FBDataResult *result = [[FBDataResult alloc] initWithJSONResponse:responseObject];
+        if (result.Error == ERROR_SUCCESS) {
+            NSDictionary *customerInfo = result.Data;
+            
+            NSLog(@"查询成功");
+            [FBGlobalConfig sharedConfig].customerId = [[customerInfo objectForKey:@"id"] intValue];
+            [FBGlobalConfig sharedConfig].customerName = [customerInfo objectForKey:@"name"];
+            [FBGlobalConfig sharedConfig].customerPhone = phone;
+            [FBGlobalConfig sharedConfig].proportion =[[customerInfo objectForKey:@"proportion"] floatValue];
+            [FBGlobalConfig sharedConfig].goCoin = [[customerInfo objectForKey:@"balance"] intValue];
+            [FBGlobalConfig sharedConfig].amount =[amount floatValue];
+
+            [hud hide:YES afterDelay:0.0f];
+            [self performSegueWithIdentifier:@"mainToPayMethodSegue" sender:self];
+        }
+        else
+        {
+            hud.mode = MBProgressHUDModeText;
+            hud.labelText = result.ErrorMessage;
+            [hud hide:YES afterDelay:1.5f];
+        }
+        
+    }failure:^(AFHTTPRequestOperation *operation, NSError *error){
+        NSLog(@"Error: %@",error);
+    }];
+    
+}
 @end

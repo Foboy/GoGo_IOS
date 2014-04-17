@@ -11,4 +11,5 @@
 @interface FBBillByMonth : NSObject
 @property (nonatomic,strong) NSMutableArray *bills;
 @property (nonatomic,copy) NSString *month;
+@property (nonatomic,assign) int monthNumber;
 @end

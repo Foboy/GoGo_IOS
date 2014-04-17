@@ -8,10 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		2C0E1CD418EC5C8F00CCDADC /* FBSuccessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C0E1CD318EC5C8F00CCDADC /* FBSuccessViewController.m */; };
+		2C14F2A018FFBCC5006F6AD3 /* NSDictionary+CaseIgnore.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C14F29F18FFBCC5006F6AD3 /* NSDictionary+CaseIgnore.m */; };
 		2C221F1C18EBDDA800076F9D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C221F1B18EBDDA700076F9D /* QuartzCore.framework */; };
 		2C221F2118EBF18800076F9D /* FBTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C221F2018EBF18800076F9D /* FBTextField.m */; };
 		2C221F2418EBF54300076F9D /* FBUIViewWithBorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C221F2318EBF54300076F9D /* FBUIViewWithBorder.m */; };
 		2C221F2718EBF74D00076F9D /* FBUIViewSingleBorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C221F2618EBF74D00076F9D /* FBUIViewSingleBorder.m */; };
+		2C3740FF18FD7D760022CF57 /* FBPayMethodViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C3740FE18FD7D760022CF57 /* FBPayMethodViewController.m */; };
+		2C37410518FD8C700022CF57 /* FBPayInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C37410418FD8C700022CF57 /* FBPayInfoViewController.m */; };
 		2C43CCDB18ED3E0E00498A88 /* FBBillTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C43CCDA18ED3E0E00498A88 /* FBBillTableViewController.m */; };
 		2C43CCDF18ED3EE700498A88 /* FBBill.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C43CCDE18ED3EE700498A88 /* FBBill.m */; };
 		2C43CCE218ED415A00498A88 /* FBBillByMonth.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C43CCE118ED415A00498A88 /* FBBillByMonth.m */; };
@@ -52,6 +55,8 @@
 /* Begin PBXFileReference section */
 		2C0E1CD218EC5C8F00CCDADC /* FBSuccessViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FBSuccessViewController.h; path = Controllers/FBSuccessViewController.h; sourceTree = "<group>"; };
 		2C0E1CD318EC5C8F00CCDADC /* FBSuccessViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FBSuccessViewController.m; path = Controllers/FBSuccessViewController.m; sourceTree = "<group>"; };
+		2C14F29E18FFBCC5006F6AD3 /* NSDictionary+CaseIgnore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDictionary+CaseIgnore.h"; path = "Kits/NSDictionary+CaseIgnore.h"; sourceTree = "<group>"; };
+		2C14F29F18FFBCC5006F6AD3 /* NSDictionary+CaseIgnore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDictionary+CaseIgnore.m"; path = "Kits/NSDictionary+CaseIgnore.m"; sourceTree = "<group>"; };
 		2C221F1B18EBDDA700076F9D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		2C221F1F18EBF18800076F9D /* FBTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FBTextField.h; path = Controls/FBTextField.h; sourceTree = "<group>"; };
 		2C221F2018EBF18800076F9D /* FBTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FBTextField.m; path = Controls/FBTextField.m; sourceTree = "<group>"; };
@@ -59,6 +64,10 @@
 		2C221F2318EBF54300076F9D /* FBUIViewWithBorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FBUIViewWithBorder.m; path = Controls/FBUIViewWithBorder.m; sourceTree = "<group>"; };
 		2C221F2518EBF74D00076F9D /* FBUIViewSingleBorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FBUIViewSingleBorder.h; path = Controls/FBUIViewSingleBorder.h; sourceTree = "<group>"; };
 		2C221F2618EBF74D00076F9D /* FBUIViewSingleBorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FBUIViewSingleBorder.m; path = Controls/FBUIViewSingleBorder.m; sourceTree = "<group>"; };
+		2C3740FD18FD7D760022CF57 /* FBPayMethodViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FBPayMethodViewController.h; path = Controllers/FBPayMethodViewController.h; sourceTree = "<group>"; };
+		2C3740FE18FD7D760022CF57 /* FBPayMethodViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FBPayMethodViewController.m; path = Controllers/FBPayMethodViewController.m; sourceTree = "<group>"; };
+		2C37410318FD8C700022CF57 /* FBPayInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FBPayInfoViewController.h; path = Controllers/FBPayInfoViewController.h; sourceTree = "<group>"; };
+		2C37410418FD8C700022CF57 /* FBPayInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FBPayInfoViewController.m; path = Controllers/FBPayInfoViewController.m; sourceTree = "<group>"; };
 		2C43CCD918ED3E0E00498A88 /* FBBillTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FBBillTableViewController.h; path = Controllers/FBBillTableViewController.h; sourceTree = "<group>"; };
 		2C43CCDA18ED3E0E00498A88 /* FBBillTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FBBillTableViewController.m; path = Controllers/FBBillTableViewController.m; sourceTree = "<group>"; };
 		2C43CCDD18ED3EE700498A88 /* FBBill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FBBill.h; path = Entities/FBBill.h; sourceTree = "<group>"; };
@@ -128,6 +137,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2C14F29D18FFBC13006F6AD3 /* Kits */ = {
+			isa = PBXGroup;
+			children = (
+				2C14F29E18FFBCC5006F6AD3 /* NSDictionary+CaseIgnore.h */,
+				2C14F29F18FFBCC5006F6AD3 /* NSDictionary+CaseIgnore.m */,
+			);
+			name = Kits;
+			sourceTree = "<group>";
+		};
 		2C221F1D18EBF10C00076F9D /* Controls */ = {
 			isa = PBXGroup;
 			children = (
@@ -199,6 +217,7 @@
 		2CA1F5C018E93154002F242F /* GoGoPay-IOS */ = {
 			isa = PBXGroup;
 			children = (
+				2C14F29D18FFBC13006F6AD3 /* Kits */,
 				2C43CCE318ED4A7B00498A88 /* ViewModels */,
 				2C43CCDC18ED3E9D00498A88 /* Entities */,
 				2CEBDE4718EBFD1200BEA773 /* Controllers */,
@@ -260,6 +279,10 @@
 				2C43CCDA18ED3E0E00498A88 /* FBBillTableViewController.m */,
 				2C43CCE718ED600E00498A88 /* FBLKLViewController.h */,
 				2C43CCE818ED600E00498A88 /* FBLKLViewController.m */,
+				2C3740FD18FD7D760022CF57 /* FBPayMethodViewController.h */,
+				2C3740FE18FD7D760022CF57 /* FBPayMethodViewController.m */,
+				2C37410318FD8C700022CF57 /* FBPayInfoViewController.h */,
+				2C37410418FD8C700022CF57 /* FBPayInfoViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -399,6 +422,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2CEBDE4D18EBFDC000BEA773 /* FBMainViewController.m in Sources */,
+				2C3740FF18FD7D760022CF57 /* FBPayMethodViewController.m in Sources */,
 				2CEBDE5018EC021600BEA773 /* FBValidViewController.m in Sources */,
 				2C43CCE218ED415A00498A88 /* FBBillByMonth.m in Sources */,
 				2CCE711A18FBAF160078ED72 /* FBGlobalConfig.m in Sources */,
@@ -406,8 +430,10 @@
 				2C221F2418EBF54300076F9D /* FBUIViewWithBorder.m in Sources */,
 				2C43CCDB18ED3E0E00498A88 /* FBBillTableViewController.m in Sources */,
 				2C43CCE618ED4B0C00498A88 /* FBBillCell.m in Sources */,
+				2C14F2A018FFBCC5006F6AD3 /* NSDictionary+CaseIgnore.m in Sources */,
 				2C0E1CD418EC5C8F00CCDADC /* FBSuccessViewController.m in Sources */,
 				2C43CCDF18ED3EE700498A88 /* FBBill.m in Sources */,
+				2C37410518FD8C700022CF57 /* FBPayInfoViewController.m in Sources */,
 				2CCE711D18FBDBDF0078ED72 /* FBDataResult.m in Sources */,
 				2C221F2118EBF18800076F9D /* FBTextField.m in Sources */,
 				2CA1F5CB18E93154002F242F /* FBAppDelegate.m in Sources */,

@@ -13,9 +13,19 @@
 
 @synthesize isLogin;
 @synthesize catalogs;
+@synthesize amount;
+@synthesize proportion;
+@synthesize goCoin;
+@synthesize customerId;
+@synthesize customerName;
+@synthesize customerPhone;
 
 @synthesize baseUrl;
 @synthesize loginUrl;
+@synthesize getGoInfoUrl;
+@synthesize sendValidCodeUrl;
+@synthesize validateUrl;
+@synthesize billListUrl;
 
 + (FBGlobalConfig*)sharedConfig
 {
@@ -23,8 +33,13 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         _sharedConfig = [[FBGlobalConfig alloc] init];
-        _sharedConfig.baseUrl = @"http://192.168.1.100/index.php?url=";
+        _sharedConfig.baseUrl = @"http://192.168.1.3/index.php?url=";
         _sharedConfig.loginUrl = [_sharedConfig.baseUrl stringByAppendingString:@"user/applogin"];
+        //_sharedConfig.loginUrl = [_sharedConfig.baseUrl stringByAppendingString:@"cash/getcatalogs"];
+        _sharedConfig.getGoInfoUrl = [_sharedConfig.baseUrl stringByAppendingString:@"cash/getgoinfo"];
+        _sharedConfig.sendValidCodeUrl = [_sharedConfig.baseUrl stringByAppendingString:@"cash/sendvalidatecode"];
+        _sharedConfig.validateUrl = [_sharedConfig.baseUrl stringByAppendingString:@"cash/gopayvalid"];
+        _sharedConfig.billListUrl = [_sharedConfig.baseUrl stringByAppendingString:@"cash/getbills"];
     });
     
     return _sharedConfig;
@@ -52,5 +67,12 @@
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
     return [manager POST:URLString parameters:parameters success:success failure:failure];
+}
++(NSString *)floatToDecimalString:(float)amount
+{
+    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+    [numberFormatter setPositiveFormat:@"###,##0.00;"];
+    NSString *formattedNumberString = [numberFormatter stringFromNumber:[NSNumber numberWithDouble:amount]];
+    return [NSString stringWithFormat:@"%@元",formattedNumberString];
 }
 @end

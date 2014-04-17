@@ -13,6 +13,7 @@
 #import "AMTagListView.h"
 
 @interface FBMainViewController : AutoHideKeyboardViewController<UITextFieldDelegate>
+- (IBAction)mainConfirmClick:(id)sender;
 @property (weak, nonatomic) IBOutlet FBTextField *ibPhoneTextField;
 @property (weak, nonatomic) IBOutlet FBTextField *ibAmountTextField;
 @property (nonatomic,strong) AMTagListView *tagListView;

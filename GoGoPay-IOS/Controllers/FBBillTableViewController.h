@@ -10,4 +10,6 @@
 
 @interface FBBillTableViewController : UITableViewController
 @property (nonatomic,strong) NSMutableArray *bills;
+@property (nonatomic,strong) NSArray* realbills;
+@property (nonatomic,assign) int pageIndex;
 @end
