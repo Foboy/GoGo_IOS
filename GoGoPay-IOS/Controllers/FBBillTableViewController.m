@@ -14,6 +14,7 @@
 #import "ISRefreshControl.h"
 #import "FBDataResult.h"
 #import "NSDictionary+CaseIgnore.h"
+#import "UIScrollView+BottomRefreshControl.h"
 
 @interface FBBillTableViewController ()
 
@@ -36,17 +37,22 @@
     [super viewDidLoad];
     
     self.bills = [NSMutableArray arrayWithCapacity:20];
-    self.realbills =[[NSArray alloc] init];
+    self.billsdetails =[[NSMutableArray alloc] init];
     
     
-    [self reloadBills];
+    [self refresh];
     
     self.refreshControl = (id)[[ISRefreshControl alloc] init];
+    self.tableView.bottomRefreshControl = (id)[[ISRefreshControl alloc] init];
     [self.refreshControl addTarget:self
                             action:@selector(refresh)
                   forControlEvents:UIControlEventValueChanged];
-    
 
+    [self.tableView.bottomRefreshControl addTarget:self
+                            action:@selector(loadMore)
+                  forControlEvents:UIControlEventValueChanged];
+    
+    //self.navigationItem.rightBarButtonItem
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -61,7 +67,24 @@
     //dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
     //dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
         //update view
-        [self reloadBills];
+    [self.billsdetails removeAllObjects];
+    
+    self.pageIndex = 0;
+    [self reloadBills];
+    
+    //});
+}
+
+
+-(void)loadMore
+{
+    //int64_t delayInSeconds = 4.0;
+    //dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+    //dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+    //update view
+    
+    self.pageIndex = self.pageIndex +1;
+    [self reloadBills];
     
     //});
 }
@@ -79,11 +102,25 @@
         if (result.Error == ERROR_SUCCESS) {
             NSArray *billsList = result.Data;
             
-            
-            [self.refreshControl endRefreshing];
-            [self bindBills:billsList];
+            if (self.pageIndex >0) {
+                [self.tableView.bottomRefreshControl endRefreshing];
+            }
+            else
+            {
+                [self.refreshControl endRefreshing];
+            }
+            if (billsList == nil || billsList.count == 0) {
+                hud.mode = MBProgressHUDModeText;
+                hud.labelText = @"没有新数据";
+                [hud hide:YES afterDelay:1.5f];
+            }
+            else
+            {
+                [self bindBills:billsList];
+                [hud hide:YES afterDelay:0.0f];
+            }
             NSLog(@"查询成功 %@",self.bills);
-            [hud hide:YES afterDelay:0.0f];
+            
         }
         else
         {
@@ -104,7 +141,12 @@
     int monthNumber = 0;
     NSDateFormatter *format=[[NSDateFormatter alloc]init];
     
-    for (NSDictionary* billdic in billsList) {
+    for (NSDictionary* bill in billsList) {
+        [self.billsdetails addObject:bill];
+    }
+    [self.bills removeAllObjects];
+    
+    for (NSDictionary* billdic in self.billsdetails) {
         FBBill* bill = [[FBBill alloc] init];
         bill.amount = [[billdic objectForCaseInsensitiveKey:@"amount"] floatValue];
         bill.name = [billdic objectForCaseInsensitiveKey:@"username"];
@@ -203,7 +245,7 @@
     FBBillCell *cell = (FBBillCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     FBBill *bill = ((FBBillByMonth *)self.bills[indexPath.section]).bills[indexPath.row];
     // Configure the cell...
-    cell.ibBillNameAndPhoneLabel.text = [NSString stringWithFormat:@"%@(%@)",bill.name,bill.phone];
+    cell.ibBillNameAndPhoneLabel.text = [NSString stringWithFormat:@"%@(%@*****%@)",bill.name,[bill.phone substringToIndex:3],[bill.phone substringFromIndex:8]];
     cell.ibBillDateLabel.text = bill.date;
     if (bill.payMethod == 1) {
         cell.ibBillPayMethodLabel.text =@"GO币支付";
@@ -276,4 +318,7 @@
 
  */
 
+- (IBAction)navRefreshAction:(id)sender {
+    [self refresh];
+}
 @end

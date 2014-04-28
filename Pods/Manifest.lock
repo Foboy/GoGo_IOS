@@ -20,6 +20,9 @@ PODS:
     - AFNetworking/NSURLSession
   - AMTagListView (0.2.1)
   - AutoHideKeyboardControllers (0.0.1)
+  - CCBottomRefreshControl (0.3.0):
+    - ReactiveCocoa
+    - UIView+TKGeometry
   - ISMethodSwizzling (0.0.2)
   - ISRefreshControl (1.4.1):
     - ISMethodSwizzling (~> 0.0.2)
@@ -27,11 +30,19 @@ PODS:
   - MBProgressHUD (0.8)
   - MTStatusBarOverlay (0.9.1)
   - Reachability (3.1.1)
+  - ReactiveCocoa (2.3):
+    - ReactiveCocoa/Core
+    - ReactiveCocoa/no-arc
+  - ReactiveCocoa/Core (2.3):
+    - ReactiveCocoa/no-arc
+  - ReactiveCocoa/no-arc (2.3)
+  - UIView+TKGeometry (0.2)
 
 DEPENDENCIES:
   - AFNetworking
   - AMTagListView
   - AutoHideKeyboardControllers
+  - CCBottomRefreshControl
   - ISRefreshControl
   - LTUpdate
   - MBProgressHUD
@@ -42,11 +53,14 @@ SPEC CHECKSUMS:
   AFNetworking: 0121f4b69be3fa58d1ab317866e036e12ac9651d
   AMTagListView: edadc34088ae236f1e50678f3de793bba2382c0b
   AutoHideKeyboardControllers: 259b13da5210b991c60ce8c8759926648539dc27
-  ISMethodSwizzling: 806aafc79dbdafbc482eae3f86b0c632ed8b1f08
+  CCBottomRefreshControl: 5f0cf1974a10191839976266ca48e122c2a08e44
+  ISMethodSwizzling: 71d6d5758975902f240ea1bedc1aa4b5d1027421
   ISRefreshControl: da5d27a3a840c8e03b2334395bf90e9c1362f761
   LTUpdate: ee58a30f73e6dcbc47ce1e5c617b024212a2dd98
   MBProgressHUD: 2bbc6f470111daf7f3eaa4eb12b8cbf01c4c0622
   MTStatusBarOverlay: 2cee705996e4e307191d423bf49e583b9b2c14ac
   Reachability: be4883bb93f31e38266ae3365e5600a317aae735
+  ReactiveCocoa: 1f6265f9d521923d3efcc37b00722cefc16df269
+  UIView+TKGeometry: c206a0a89cedfb7ad7da032edca96cbcdaddbaad
 
 COCOAPODS: 0.29.0

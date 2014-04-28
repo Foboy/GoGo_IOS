@@ -60,6 +60,12 @@
 #define COCOAPODS_VERSION_MINOR_AutoHideKeyboardControllers 0
 #define COCOAPODS_VERSION_PATCH_AutoHideKeyboardControllers 1
 
+// CCBottomRefreshControl
+#define COCOAPODS_POD_AVAILABLE_CCBottomRefreshControl
+#define COCOAPODS_VERSION_MAJOR_CCBottomRefreshControl 0
+#define COCOAPODS_VERSION_MINOR_CCBottomRefreshControl 3
+#define COCOAPODS_VERSION_PATCH_CCBottomRefreshControl 0
+
 // ISMethodSwizzling
 #define COCOAPODS_POD_AVAILABLE_ISMethodSwizzling
 #define COCOAPODS_VERSION_MAJOR_ISMethodSwizzling 0
@@ -95,4 +101,28 @@
 #define COCOAPODS_VERSION_MAJOR_Reachability 3
 #define COCOAPODS_VERSION_MINOR_Reachability 1
 #define COCOAPODS_VERSION_PATCH_Reachability 1
+
+// ReactiveCocoa
+#define COCOAPODS_POD_AVAILABLE_ReactiveCocoa
+#define COCOAPODS_VERSION_MAJOR_ReactiveCocoa 2
+#define COCOAPODS_VERSION_MINOR_ReactiveCocoa 3
+#define COCOAPODS_VERSION_PATCH_ReactiveCocoa 0
+
+// ReactiveCocoa/Core
+#define COCOAPODS_POD_AVAILABLE_ReactiveCocoa_Core
+#define COCOAPODS_VERSION_MAJOR_ReactiveCocoa_Core 2
+#define COCOAPODS_VERSION_MINOR_ReactiveCocoa_Core 3
+#define COCOAPODS_VERSION_PATCH_ReactiveCocoa_Core 0
+
+// ReactiveCocoa/no-arc
+#define COCOAPODS_POD_AVAILABLE_ReactiveCocoa_no_arc
+#define COCOAPODS_VERSION_MAJOR_ReactiveCocoa_no_arc 2
+#define COCOAPODS_VERSION_MINOR_ReactiveCocoa_no_arc 3
+#define COCOAPODS_VERSION_PATCH_ReactiveCocoa_no_arc 0
+
+// UIView+TKGeometry
+#define COCOAPODS_POD_AVAILABLE_UIView_TKGeometry
+#define COCOAPODS_VERSION_MAJOR_UIView_TKGeometry 0
+#define COCOAPODS_VERSION_MINOR_UIView_TKGeometry 2
+#define COCOAPODS_VERSION_PATCH_UIView_TKGeometry 0
 

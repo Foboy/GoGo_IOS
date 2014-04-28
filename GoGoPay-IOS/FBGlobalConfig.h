@@ -12,7 +12,7 @@
 
 @interface FBGlobalConfig : NSObject
 @property (nonatomic,assign) BOOL isLogin;
-@property (nonatomic,strong) NSArray *catalogs;
+@property (nonatomic,strong) NSMutableArray *catalogs;
 @property (nonatomic,assign) float amount;
 @property (nonatomic,copy) NSString* customerName;
 @property (nonatomic,assign) int goCoin;

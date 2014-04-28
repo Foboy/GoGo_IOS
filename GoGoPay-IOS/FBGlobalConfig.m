@@ -33,7 +33,7 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         _sharedConfig = [[FBGlobalConfig alloc] init];
-        _sharedConfig.baseUrl = @"http://192.168.1.3/index.php?url=";
+        _sharedConfig.baseUrl = @"http://192.168.0.62:81/crm/index.php?url=";
         _sharedConfig.loginUrl = [_sharedConfig.baseUrl stringByAppendingString:@"user/applogin"];
         //_sharedConfig.loginUrl = [_sharedConfig.baseUrl stringByAppendingString:@"cash/getcatalogs"];
         _sharedConfig.getGoInfoUrl = [_sharedConfig.baseUrl stringByAppendingString:@"cash/getgoinfo"];

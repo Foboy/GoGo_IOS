@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface FBPayMethodViewController : UIViewController
+- (IBAction)goPayAction:(id)sender;
 
 
 @end

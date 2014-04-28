@@ -59,7 +59,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTagsView:) name:@"loginSuccessed" object:nil];
     
     [self.ibPhoneTextField setText:@"15882323654"];
-    [self.ibAmountTextField setText:@"234.09"];
+    [self.ibAmountTextField setText:@"247.6"];
 
     
     // Tag's corner radius
@@ -178,10 +178,19 @@
 }
 
 - (IBAction)mainConfirmClick:(id)sender {
+    
+    
+    
     NSString *phone = [[self ibPhoneTextField] text];
     NSString *amount = [[self ibAmountTextField] text];
     __block MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     FBGlobalConfig *config = [FBGlobalConfig sharedConfig];
+    config.catalogs = [[NSMutableArray alloc] init];
+    for (AMTagView * item in self.tagListView.tags) {
+        if (item.selected) {
+            [config.catalogs addObject:[NSNumber numberWithInt:item.catId]];
+        }
+    }
     NSDictionary *parameters = @{@"phone": phone};
 
     

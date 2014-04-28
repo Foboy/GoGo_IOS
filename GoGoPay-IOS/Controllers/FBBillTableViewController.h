@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface FBBillTableViewController : UITableViewController
+- (IBAction)navRefreshAction:(id)sender;
 @property (nonatomic,strong) NSMutableArray *bills;
-@property (nonatomic,strong) NSArray* realbills;
+@property (nonatomic,strong) NSMutableArray* billsdetails;
 @property (nonatomic,assign) int pageIndex;
 @end

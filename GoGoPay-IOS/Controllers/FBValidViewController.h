@@ -7,8 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AutoHideKeyboardViewController.h"
+#import "FBTextField.h"
 
 
-@interface FBValidViewController : UIViewController
+@interface FBValidViewController : AutoHideKeyboardViewController<UITextFieldDelegate>
+@property (weak, nonatomic) IBOutlet FBTextField *ibValidCode;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *ibReSendValidCode;
+- (IBAction)resendValidCodeAction:(id)sender;
+- (IBAction)goPayConfirmAction:(id)sender;
 
 @end
